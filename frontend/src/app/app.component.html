@@ -1,0 +1,46 @@
+<!-- Toolbar -->
+<div class="container">
+  <h1>{{ title }}!</h1>
+  <h3>{{ author }}</h3>
+
+  <hr />
+  {{ orderForm.value | json }} <br />
+  Data from order model {{ vinhoModel | json }}
+
+  <hr />
+  Confirm: "HUAHUAushdhuashduasd" <br />
+  <hr />
+
+  <form #orderForm="ngForm" (submit)="submitForm(orderForm.value)">
+    <div class="form-group">
+      <label>Nome: </label
+      ><input class="form-control" name="nome" [(ngModel)]="vinhoModel.nome" />
+    </div>
+
+    <div class="form-group">
+      <label>País: </label
+      ><input class="form-control" name="pais" [(ngModel)]="vinhoModel.pais" />
+    </div>
+
+    <div class="form-group">
+      <label>Tipo do vinho: </label>
+      <select class="custom-select" name="tipo" [(ngModel)]="vinhoModel.tipo">
+        <option *ngFor="let tipo of tipos">{{ tipo }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Tipo da uva: </label>
+      <select class="custom-select" name="uva" [(ngModel)]="vinhoModel.uva">
+        <option *ngFor="let uva of uvas">{{ uva }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Harmonização com comidas: </label>
+      <input class="form-control" name="harm" [(ngModel)]="vinhoModel.harm" />
+    </div>
+
+    <input type="submit" (submit)="submitForm(orderForm.value)" />
+  </form>
+</div>

@@ -1,0 +1,26 @@
+version: '3.0'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/var/lib/mongodb
+
+  front:
+    image: node
+    ports:
+      - 80:4200
+    volumes:
+      - "./frontend:/src"
+    command: bash -c "cd src; npm start"
+    links:
+      - "back"
+
+  back:
+    image: node
+    ports:
+      - 3000:3000
+    volumes:
+      - "./backend:/src"
+    command: bash -c "cd src; npm start"
