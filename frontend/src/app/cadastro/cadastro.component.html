@@ -1,0 +1,40 @@
+
+
+<form #orderForm="ngForm" (submit)="submitForm(orderForm.value)">
+    <br>
+    <div class="form-group">
+      <label>Nome: </label
+      ><input class="form-control" name="nome" [(ngModel)]="vinhoModel.nome" />
+    </div>
+
+    <br>
+    <div class="form-group">
+      <label>País: </label
+      ><input class="form-control" name="pais" [(ngModel)]="vinhoModel.pais" />
+    </div>
+
+    <br> 
+    <div class="form-group">
+      <label>Tipo do vinho: </label>
+      <select class="custom-select" name="tipo" [(ngModel)]="vinhoModel.tipo">
+        <option *ngFor="let tipo of tipos">{{ tipo }}</option>
+      </select>
+    </div>
+
+    <br>
+    <div class="form-group">
+      <label>Tipo da uva: </label>
+      <select class="custom-select" name="uva" [(ngModel)]="vinhoModel.uva">
+        <option *ngFor="let uva of uvas">{{ uva }}</option>
+      </select>
+    </div>
+
+    <br>
+    <div class="form-group">
+      <label>Harmonização com comidas: </label>
+      <input class="form-control" name="harm" [(ngModel)]="vinhoModel.harm" />
+    </div>
+    
+    <br>
+    <input type="submit" value="Cadastrar" (submit)="submitForm(orderForm.value)" />
+  </form>

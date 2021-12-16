@@ -2,9 +2,17 @@ var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+router.get("/vinhos", function (req, res, next) {
+  var db = require("../db");
+  var Users = db.Mongoose.model('vinhos', db.UserSchema, 'vinhos');
+  Users.find({}).lean().exec(
+    function (e, docs) {
+      res.write(JSON.stringify(docs));
+      res.end();
+    });
 });
+
+
 
 router.post("/vinho", function (req, res, next) {
   var db = require("../db");
@@ -16,17 +24,30 @@ router.post("/vinho", function (req, res, next) {
     harm: req.body.harm,
   };
 
-  console.log(data);
+  res.setHeader("content-type","text/plain");
+
+  for(k of Object.keys(data)){
+    if(!data[k]){
+      console.log(k+" veio vazio");
+      res.writeHead(400);
+      res.write(k+" veio vazio");
+      res.end();
+      return;
+    }
+  }
 
   var Vinhos = db.Mongoose.model("vinhos", db.VinhoSchema, "vinhos");
   var vinho = new Vinhos(data);
   vinho.save(function (err) {
     if (err) {
       console.log("Error! " + err.message);
-      return err;
+      res.writeHead(500);
+      res.write(err.message);
     } else {
       console.log("Post saved");
+      res.write("Salvo com sucesso");
     }
+    res.end();
   });
 });
 

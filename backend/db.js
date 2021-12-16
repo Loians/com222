@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://mongo:27017/trabFinal");
+mongoose.connect("mongodb://localhost:27017/trabFinal");
 
 var vinhoSchema = new mongoose.Schema(
   {
